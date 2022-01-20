@@ -1,0 +1,30 @@
+﻿folder name,file name
+profile,uploading
+group,all_groups,Private
+group,add_group,My New Group
+group,invite_user,gu.bob@mechsolutions.com
+group,all_groups,Private;My New Group
+group,update_group,new group name
+group,all_groups,Private;new group name
+group,delete_group
+group,all_groups,Private
+profile,update_profile
+profile,get_by_user
+project,add_project
+project,list_project
+project,project_summary
+group,get_summary
+group,list_by_group
+project,delete_project
+resource,upload_model_file
+resource,rename_model_file
+resource,delete_model_file
+printerprofile,get_model_by_name,Anet A6;Creality Ender-3;Prusa i3 Mk3/Mk3s
+printerprofile,add_preset_printer
+printerprofile,get_favorite_by_name
+printerprofile,delete_favorite
+printerprofile,get_all_favorite_by_group
+material,get_physical_property_by_name,"PLA Plus";"PLA-Filled CF";"PA12";"TPU"
+material,delete_material
+material,get_material_by_id
+material,get_all_material_by_group
