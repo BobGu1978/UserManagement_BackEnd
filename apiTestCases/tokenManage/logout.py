@@ -8,7 +8,7 @@ from libs.utils import *
 def api_test_method(data, expect=[]):
     headers = {}
     headers['Authorization'] = data["header"]["Authorization"]
-    response, sc = call_api(data["url"] + ":" + data["port"] + "/auth/logout", headers)
+    response, sc = call_api(data["url"] + ":" + data["port"] + "/auth/logout", headers,data={}, file = "",method = "GET")
     if response == {}:
         print_warning("api logout is not reachable.")
         return False, sc

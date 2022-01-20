@@ -6,47 +6,39 @@ from libs.utils import *
 import libs.header
 
 def api_test_method(data,*kwargs):
-    base_folder = data["folder"] + libs.header.MATERIAL_FOLDER + "\\add_material"
-    source_folder = data["folder"] + libs.header.MATERIAL_FOLDER + "\\physical profile"
-    dest_folder = data["folder"] + libs.header.MATERIAL_FOLDER + "\\favorite"
+    """ when write data into json file, do remember to use encoding='utf-8' """
+    base_folder = data["folder"] + libs.header.ORG_FOLDER + "\\newOrg"
+    dest_folder = data["folder"] + libs.header.ORG_FOLDER+ "\\allOrg"
     force_remove_dir(dest_folder)
     create_folder(dest_folder)
-    url = format_url(data["url"], "8443", "/physicalProperties/custom/add")
+    url = format_url(data["url"], data["port"], "/server/org/insertOrg")
     headers = {}
     headers['Authorization'] = data["header"]["Authorization"]
     headers['Content-Type'] = 'application/json'
     ret = []
     code = []
-    my_list = [
-      "materialSubCategory",
-      "maxTemp",
-      "minTemp",
-      "idealTemp",
-      "maxBedTemp",
-      "minBedTemp",
-      "adhesionSurface",
-      "materialDescription",
-      "heatedChamberNeeded",
-      "density",
-      "tensileStrength",
-      "impactStrength",
-      "surface",
-      "transparency",
-      "processability",
-      "fillDensity",
-      "layerHeight",
-      "printSpeed",
-      "retractionSpeed",
-      "idealBedTemp",
-      "idealNozzleTemp"
-    ]
     test_data = load_data_from_json_file(base_folder+"\\data.json")
-    for id in [libs.header.groupId, libs.header.privategroupId]:
-        for name in test_data:
-            mat_folder =  source_folder + "\\" + name["material"]
-            sc_filename = name["subCategory"] + ".json"
-            payload = load_data_from_json_file(mat_folder + "\\" + sc_filename)
-            if payload:
-                payload["materialName"] = name["subCategory"]
-                payload["groupId"] = id
-                payload["picture"] ="cp-materials-" + name["material"].lower()
+    for newOrg in test_data:
+        payload = newOrg["input"]
+        if payload:
+            payload["created"] = now_to_string()
+            payload["createdby"] = data["username"]
+            libs.header.maxOrgId = libs.header.maxOrgId + 1
+            payload["orgId"] =  libs.header.maxOrgId
+            response, sc = call_api(url, headers, json.dumps(payload))
+            rt = check_status_code(sc, 200)
+            code.append(sc)
+            ret.append(rt)
+            """what does the response look like"""
+            if rt:
+                libs.header.orgIDList.append(payload["orgId"])
+                dump_json_2_file(dest_folder + "\\" + payload["orgId"] + ".json", json.dumps(payload))
+                logging.info("adding new organization succeeds")
+            else:
+                logging.warning("adding organization fails.")
+                libs.header.maxOrgId = libs.header.maxOrgId -1
+        else:
+            logging.warning("fail to get data for new organization")
+            ret.append(False)
+            code.append(-1)
+    return not False in ret, code

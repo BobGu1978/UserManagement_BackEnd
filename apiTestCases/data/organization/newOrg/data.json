@@ -1,0 +1,48 @@
+[
+  {
+    "input": {
+      "addressLine1": "my address 1",
+      "addressLine2": "my address 2",
+      "city": "Scarborough",
+      "contactPerson": "",
+      "country": "CA",
+      "created": "",
+      "createdby": "cloud3d_admin",
+      "email": "",
+      "orgAbbr": "Test",
+      "orgComments": "this is a test",
+      "orgId": 0,
+      "orgName": "",
+      "orgUuid": "1",
+      "phoneNumber": "1112223344",
+      "postCode": "M1S 3V6",
+      "province": "Ontario",
+      "updated": "",
+      "updatedby": ""
+    },
+    "expected": 200
+  },
+  {
+    "input": {
+      "addressLine1": "my address 1",
+      "addressLine2": "my address 2",
+      "city": "Scarborough",
+      "contactPerson": "",
+      "country": "CA",
+      "created": "",
+      "createdby": "cloud3d_admin",
+      "email": "",
+      "orgAbbr": "Test",
+      "orgComments": "this is a test",
+      "orgId": 0,
+      "orgName": "",
+      "orgUuid": "1",
+      "phoneNumber": "1112223344",
+      "postCode": "M1S 3V6",
+      "province": "Ontario",
+      "updated": "",
+      "updatedby": ""
+    },
+    "expected": 200
+  }
+]

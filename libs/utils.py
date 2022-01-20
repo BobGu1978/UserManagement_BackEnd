@@ -3,6 +3,11 @@ import glob
 import logging
 import json
 from shutil import rmtree
+import datetime
+
+def now_to_string():
+    dt = datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="microseconds")
+    return str(dt)
 
 def root_dir():
     return os.path.abspath(os.curdir)
@@ -35,7 +40,7 @@ def create_folder(folder_name):
         os.makedirs(folder_name)
 
 def dump_json_2_file(file_name, data):
-    with open(file_name,"w") as f:
+    with open(file_name,"w",encoding="utf-8") as f:
         json.dump(data,f,ensure_ascii=False)
 
 def compare_list(my_list=[], returned={}, expected={}, result=[]):
@@ -52,10 +57,11 @@ def find_all_data_files(dir_name,file_type = "*.json"):
 
 def load_data_from_json_file(file_name):
     try:
-        with open(file_name) as source:
+        with open(file_name,"r",encoding="utf-8") as source:
             js = json.load(source)
         return js
-    except:
+    except Exception as e:
+        print(e)
         return None
 
 def check_status_code(s_code, expected_value):
