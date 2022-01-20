@@ -1,22 +1,10 @@
 DATA_FOLDER = "\\data"
 LOGON_FOLDER = DATA_FOLDER + "\\logon"
+ORG_FOLDER = DATA_FOLDER + "\\organization"
+GROUP_FOLDER = DATA_FOLDER + "\\group"
+USER_FOLDER = DATA_FOLDER + "\\user"
 
-
-userId = 0
 groupId = 0
-privategroupId = 0
-memberId = 0
-profileId = 0
 uploadImgUrl = ""
-profileImgUrl = ""
+orgIDList = []
 groupIdList = []
-projectId =[]
-projects = 0
-files = 0
-modelFiles = []
-gcodeFiles = []
-printJobs = 0
-#totalFileSize = 0
-totalEstTime = 0
-favoritePrinter = []
-material=[]
